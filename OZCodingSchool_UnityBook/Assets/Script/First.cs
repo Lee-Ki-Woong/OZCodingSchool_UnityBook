@@ -14,6 +14,9 @@ public class First : MonoBehaviour
     //Directional Light의 Light 컴포넌트를 담을 변수
     public Light DLlight;
 
+    //Directional Light의 Light 컴포넌트를 담을 변수2
+    public Light DLlight2;
+
     //Main Camera를 검색해서 담을 변수1
     public GameObject findCamera1;
 
@@ -44,6 +47,9 @@ public class First : MonoBehaviour
 
         //Main Camera를 태그로 검색해 변수에 할당
         findCamera3 = GameObject.FindGameObjectWithTag("MainCamera");
+
+        //Directional Light의 Light 컴포넌트를 가져와 변수에 할당
+        DLlight2 = FindObjectOfType<Light>();
 
     }
 }
