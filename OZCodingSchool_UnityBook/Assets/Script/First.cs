@@ -8,15 +8,22 @@ public class First : MonoBehaviour
     //자신의 Transform 컴포넌트를 담을 변수
     public Transform myTr;
 
+    //자신의 GameObject 컴포넌트를 담을 변수
+    public GameObject myG;
+
     //Directional Light의 Light 컴포넌트를 담을 변수
     public Light DLlight;
+
 
     void Start()
     {
         //자신의 Transform 컴포넌트를 가져와 변수에 할당
         myTr = GetComponent<Transform>();
+        myTr = transform;
+
+        myG = gameObject;
 
         //Directional Light 컴포넌트를 가져와 변수에 할당
-        DLlight = GetComponent<Light>();
+        DLlight = tr.GetComponent<Light>();
     }
 }
