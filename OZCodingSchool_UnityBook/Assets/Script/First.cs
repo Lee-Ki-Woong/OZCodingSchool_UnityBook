@@ -20,6 +20,9 @@ public class First : MonoBehaviour
     //Main Camera를 담을 변수2
     public GameObject findCamera2;
 
+    //Main Camera를 담을 변수3
+    public GameObject findCamera3;
+
     void Start()
     {
         //자신의 Transform 컴포넌트를 가져와 변수에 할당
@@ -38,6 +41,9 @@ public class First : MonoBehaviour
         //자식 오브젝트 중 Main Camera를 검색한 후
         //GameObject 컴포넌트를 가져와 변수에 할당
         findCamera2 = transform.Find("Main Camera").gameObject;
+
+        //Main Camera를 태그로 검색해 변수에 할당
+        findCamera3 = GameObject.FindGameObjectWithTag("MainCamera");
 
     }
 }
