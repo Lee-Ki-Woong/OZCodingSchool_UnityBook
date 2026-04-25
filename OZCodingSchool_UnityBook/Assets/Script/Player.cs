@@ -17,9 +17,12 @@ public class Player : MonoBehaviour
         dir.Normalize();
 
         //이동할 방향에 원하는 속도 곱하기
-        transform.position += dir * m_moveSpeed;
+        //transform.position += dir * m_moveSpeed;
 
         // x축에는 h의 값을, z축에는 v의 값을 계속 더하기
-        transform.position += new Vector3(h, 0, v) * m_moveSpeed;
+        //transform.position += new Vector3(h, 0, v) * m_moveSpeed;
+
+        // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
+        transform.position += dir * m_moveSpeed * Time.deltaTime;
     }
 }
