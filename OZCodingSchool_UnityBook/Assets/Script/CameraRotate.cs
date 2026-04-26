@@ -20,6 +20,6 @@ public class CameraRotate : MonoBehaviour
         tempX = Mathf.Clamp(tempX, -30, 15);
 
         //제한된 값을 eulerAngles.x에 적용 (y축과 z축은 고정되지 않고 현재 각도대로)
-        transform.localRotation = Quaternion.Euler(tempX, transform.localRotation.eulerAngles.y, 0);
+        transform.localRotation = Quaternion.Euler(tempX, 0, 0);
     }
 }
