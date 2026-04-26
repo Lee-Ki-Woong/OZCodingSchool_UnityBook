@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
         // 모든 방향의 속도가 동일하도록 정규화
         dir.Normalize();
 
+        // 플레이어를 기준으로 dir의 방향 조절
+        dir = transform.TransformDirection(dir);
+
         // 제거 // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
         // transform.position += dir * MoveSpeed * Time.deltaTime;
 
