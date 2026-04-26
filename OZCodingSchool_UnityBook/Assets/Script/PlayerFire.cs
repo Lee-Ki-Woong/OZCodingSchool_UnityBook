@@ -5,23 +5,27 @@ public class PlayerFire : MonoBehaviour
     // 총알 프리팹을 담아둘 변수
     public GameObject BulletPref;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // 총알을 발사하는 힘
+    public float firePower;
+
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 마우스 좌클릭을 누르는 순간
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
         {
             // 게임 안에 리소스 폴더에서 불러오기한 총알 프리팹의 복사본 생성
             //Instantiate(Resources.Load("Bullet"));
 
             // 게임 안에 총알 프리팹의 복사본 생성 ( 플레이어의 위치보다 1 앞에 )
-            Instantiate(BulletPref, transform.position + transform.forward, Quaternion.identity);
+            // 생성 후 bullet 변수에 할당
+            GameObject bullet = Instantiate(BulletPref, transform.position + transform.forward + transform.up, Quaternion.identity);
+
+            // 총알 복사본이 앞으로 날아가는 순간적인 힘 발생
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
         }
     }
 }
