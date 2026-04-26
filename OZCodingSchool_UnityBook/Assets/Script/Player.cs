@@ -5,12 +5,14 @@ public class Player : MonoBehaviour
     public float MoveSpeed; // 이동 속도
     public float JumpPower; // 점프하는 힘
 
-    Rigidbody rb; // 플레이어의 Rigidbody 컴포넌트
+    private Rigidbody m_rb; // 플레이어의 Rigidbody 컴포넌트
+
+    private int m_jumpCount;
 
     private void Start()
     {
         // 플레이어의 Rigidbody 컴포넌트를 가져와서 저장
-        rb = GetComponent<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
     }
 
 
@@ -35,11 +37,14 @@ public class Player : MonoBehaviour
         // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
         transform.position += dir * MoveSpeed * Time.deltaTime;
 
-        // <Space> 키를 누른 순간
-        if (Input.GetKeyDown(KeyCode.Space))
+        // <Space> 키를 누른 순간, 점프한 횟수가 2회 미만이라면
+        if (Input.GetKeyDown(KeyCode.Space) && m_jumpCount < 2)
         {
             // 위로 순간적인 힘 발생
-            rb.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
+            m_rb.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
+
+            //점프할 때마다 점프 횟수 증가
+            m_jumpCount++;
         }
     }
 }
