@@ -12,5 +12,7 @@ public class CameraRotate : MonoBehaviour
 
         //마우스가 움직인 만큼 X축 회전
         transform.Rotate(-mouseMoveY * RotateSpeed * Time.deltaTime, 0, 0);
+
+        print(transform.rotation.x);
     }
 }
