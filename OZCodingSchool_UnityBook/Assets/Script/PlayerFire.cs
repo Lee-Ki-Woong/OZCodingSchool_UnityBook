@@ -18,7 +18,10 @@ public class PlayerFire : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
             // 게임 안에 리소스 폴더에서 불러오기한 총알 프리팹의 복사본 생성
-            Instantiate(Resources.Load("Bullet"));
+            //Instantiate(Resources.Load("Bullet"));
+
+            // 게임 안에 총알 프리팹의 복사본 생성 ( 플레이어의 위치보다 1 앞에 )
+            Instantiate(BulletPref, transform.position + transform.forward, Quaternion.identity);
         }
     }
 }
