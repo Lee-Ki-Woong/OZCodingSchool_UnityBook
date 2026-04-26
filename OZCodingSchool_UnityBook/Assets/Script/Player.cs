@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody m_rb; // 플레이어의 Rigidbody 컴포넌트
 
-    private int m_jumpCount;
+    private int m_jumpCount;// 점프한 횟수
 
     private void Start()
     {
@@ -28,12 +28,6 @@ public class Player : MonoBehaviour
         // 모든 방향의 속도가 동일하도록 정규화
         dir.Normalize();
 
-        // 이동할 방향에 원하는 속도 곱하기
-        // transform.position += dir * m_moveSpeed;
-
-        // x축에는 h의 값을, z축에는 v의 값을 계속 더하기
-        // transform.position += new Vector3(h, 0, v) * m_moveSpeed;
-
         // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
         transform.position += dir * MoveSpeed * Time.deltaTime;
 
@@ -45,6 +39,18 @@ public class Player : MonoBehaviour
 
             //점프할 때마다 점프 횟수 증가
             m_jumpCount++;
+        }
+    }
+
+    //어떤 물체와 충돌을 시작한 순간에 호출
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        // 충돌한 물체의 태그가 "Ground"라면
+        if(collision.gameObject.tag == "Ground")
+        {
+            // 점프 횟수 초기화
+            m_jumpCount = 0;
         }
     }
 }
