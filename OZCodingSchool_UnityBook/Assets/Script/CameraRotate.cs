@@ -16,9 +16,6 @@ public class CameraRotate : MonoBehaviour
         //마우스가 움직인 만큼 X축 회전
         transform.Rotate(-mouseMoveY * RotateSpeed * Time.deltaTime, 0, 0);
 
-        // x축의 각도 출력
-        print(transform.eulerAngles.x);
-
         // x의 각도가 180을 넘는다면
         if (transform.eulerAngles.x > 180)
         {
@@ -34,7 +31,7 @@ public class CameraRotate : MonoBehaviour
         //음수를 포함한 x의 각도를 -30º~ 30º로 제한
         tempX = Mathf.Clamp(tempX, -30, 30);
 
-        //제한된 값을 eulerAngles.x에 적용
-        transform.eulerAngles = new Vector3 (tempX, 0, 0);
+        //제한된 값을 eulerAngles.x에 적용 (y축과 z축은 고정되지 않고 현재 각도대로)
+        transform.eulerAngles = new Vector3 (tempX, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }
