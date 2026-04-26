@@ -4,6 +4,7 @@ public class PlayerFire : MonoBehaviour
 {
     // 총알 프리팹을 담아둘 변수
     public GameObject BulletPref;
+    public GameObject Gun;
 
     // 총알을 발사하는 힘
     public float firePower;
@@ -14,7 +15,7 @@ public class PlayerFire : MonoBehaviour
         Cursor.visible = false;
 
         // 마우스 커서가 게임 화면을 벗어나지 못하도록 잠금
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -27,10 +28,10 @@ public class PlayerFire : MonoBehaviour
 
             // 게임 안에 총알 프리팹의 복사본 생성 ( 플레이어의 위치보다 1 앞에 )
             // 생성 후 bullet 변수에 할당
-            GameObject bullet = Instantiate(BulletPref, transform.position + transform.forward + transform.up, Quaternion.identity);
+            GameObject bullet = Instantiate(BulletPref, Gun.transform.position + Gun.transform.forward, Quaternion.identity);
 
             // 총알 복사본이 앞으로 날아가는 순간적인 힘 발생
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
+            bullet.GetComponent<Rigidbody>().AddForce(Gun.transform.forward * firePower, ForceMode.Impulse);
         }
     }
 }
