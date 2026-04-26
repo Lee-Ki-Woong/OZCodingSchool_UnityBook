@@ -5,7 +5,7 @@ public class CameraRotate : MonoBehaviour
     public float RotateSpeed; // 회전 속도
 
     //eulerAngles.x 의 값을 담아둘 변수
-    float tempX;
+    float tempX = 0;
 
     // Update is called once per frame
     void Update()
@@ -14,24 +14,12 @@ public class CameraRotate : MonoBehaviour
         float mouseMoveY = Input.GetAxis("Mouse Y");
 
         //마우스가 움직인 만큼 X축 회전
-        transform.Rotate(-mouseMoveY * RotateSpeed * Time.deltaTime, 0, 0);
-
-        // x의 각도가 180을 넘는다면
-        if (transform.eulerAngles.x > 180)
-        {
-            tempX = transform.eulerAngles.x - 360;
-        }
-        // x의 각도가 180을 넘지 않는다면
-        else
-        {
-            //그대로 저장
-            tempX = transform.eulerAngles.x;
-        }
+        tempX -= mouseMoveY * RotateSpeed * Time.deltaTime;
 
         //음수를 포함한 x의 각도를 -30º~ 30º로 제한
-        tempX = Mathf.Clamp(tempX, -30, 30);
+        tempX = Mathf.Clamp(tempX, -30, 15);
 
         //제한된 값을 eulerAngles.x에 적용 (y축과 z축은 고정되지 않고 현재 각도대로)
-        transform.eulerAngles = new Vector3 (tempX, transform.eulerAngles.y, transform.eulerAngles.z);
+        transform.localRotation = Quaternion.Euler(tempX, transform.localRotation.eulerAngles.y, 0);
     }
 }
