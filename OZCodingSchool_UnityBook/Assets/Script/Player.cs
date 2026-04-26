@@ -28,8 +28,11 @@ public class Player : MonoBehaviour
         // 모든 방향의 속도가 동일하도록 정규화
         dir.Normalize();
 
-        // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
-        transform.position += dir * MoveSpeed * Time.deltaTime;
+        // 제거 // 이동할 방향에 원하는 속도 곱하기 (모든 기기에서 동일한 속도)
+        // transform.position += dir * MoveSpeed * Time.deltaTime;
+
+        // 물리 작용을 이용해 이동
+        m_rb.MovePosition(m_rb.position + (dir * MoveSpeed * Time.deltaTime));
 
         // <Space> 키를 누른 순간, 점프한 횟수가 2회 미만이라면
         if (Input.GetKeyDown(KeyCode.Space) && m_jumpCount < 2)
