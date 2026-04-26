@@ -4,6 +4,9 @@ public class CameraRotate : MonoBehaviour
 {
     public float RotateSpeed; // 회전 속도
 
+    //eulerAngles.x 의 값을 담아둘 변수
+    float tempX;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,5 +18,23 @@ public class CameraRotate : MonoBehaviour
 
         // x축의 각도 출력
         print(transform.eulerAngles.x);
+
+        // x의 각도가 180을 넘는다면
+        if (transform.eulerAngles.x > 180)
+        {
+            tempX = transform.eulerAngles.x - 360;
+        }
+        // x의 각도가 180을 넘지 않는다면
+        else
+        {
+            //그대로 저장
+            tempX = transform.eulerAngles.x;
+        }
+
+        //음수를 포함한 x의 각도를 -30º~ 30º로 제한
+        tempX = Mathf.Clamp(tempX, -30, 30);
+
+        //제한된 값을 eulerAngles.x에 적용
+        transform.eulerAngles = new Vector3 (tempX, 0, 0);
     }
 }
