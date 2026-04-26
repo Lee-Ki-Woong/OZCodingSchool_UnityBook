@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     public float MoveSpeed; // 이동 속도
     public float JumpPower; // 점프하는 힘
+    public float RotateSpeed; // 회전 속도
 
     private Rigidbody m_rb; // 플레이어의 Rigidbody 컴포넌트
 
@@ -43,6 +44,13 @@ public class Player : MonoBehaviour
             //점프할 때마다 점프 횟수 증가
             m_jumpCount++;
         }
+
+        // 마우스의 좌우 움직임 입력을 숫자로 받아서 저장
+        float mouseMoveX = Input.GetAxis("Mouse X");
+
+        //마우스가 움직인 만큼 Y축 회전
+        transform.Rotate(0, mouseMoveX * RotateSpeed * Time.deltaTime, 0);
+
     }
 
     //어떤 물체와 충돌을 시작한 순간에 호출
