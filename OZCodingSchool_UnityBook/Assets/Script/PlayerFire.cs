@@ -21,7 +21,7 @@ public class PlayerFire : MonoBehaviour
     void Update()
     {
         // 마우스 좌클릭을 누르는 순간
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             // 게임 안에 리소스 폴더에서 불러오기한 총알 프리팹의 복사본 생성
             //Instantiate(Resources.Load("Bullet"));
@@ -39,11 +39,12 @@ public class PlayerFire : MonoBehaviour
             // Ray에 맞은 물체를 담아둘 변수
             RaycastHit hit;
 
-            // Ray를 발사하고, Ray에 맞은 물체는 hit에 저장
-            Physics.Raycast(ray, out hit);
-
-            // 맞은 물체의 이름 출력
-            print(hit.transform.name);
+            // Ray를 발사하고, Ray에 맞은 물체는 hit에 저장, 맞은 물체가 있을 때만 확인
+            if (Physics.Raycast(ray, out hit))
+            {
+                // 맞은 물체의 이름 출력
+                print(hit.transform.name);
+            }
         }
     }
 }
