@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 190218844}
   - component: {fileID: 190218845}
   - component: {fileID: 190218846}
+  - component: {fileID: 190218847}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -197,6 +198,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &190218847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190218843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8021f96d7deac034c9e91b6f7b40725b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFire
+  BulletPref: {fileID: 8019360787671295097, guid: 901a06d89d5a33c4cb2e34d4a1b133ea, type: 3}
 --- !u!1 &222608685
 GameObject:
   m_ObjectHideFlags: 0
