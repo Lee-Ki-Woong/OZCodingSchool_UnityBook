@@ -32,6 +32,18 @@ public class PlayerFire : MonoBehaviour
 
             // 총알 복사본이 앞으로 날아가는 순간적인 힘 발생
             bullet.GetComponent<Rigidbody>().AddForce(Gun.transform.forward * firePower, ForceMode.Impulse);
+
+            // 화면 가운데에서 시작하는 Ray 생성
+            Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+
+            // Ray에 맞은 물체를 담아둘 변수
+            RaycastHit hit;
+
+            // Ray를 발사하고, Ray에 맞은 물체는 hit에 저장
+            Physics.Raycast(ray, out hit);
+
+            // 맞은 물체의 이름 출력
+            print(hit.transform.name);
         }
     }
 }
