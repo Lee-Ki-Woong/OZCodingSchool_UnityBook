@@ -10,6 +10,11 @@ public class PlayerFire : MonoBehaviour
 
     private void Start()
     {
+        // 마우스 커서를 안 보이게
+        Cursor.visible = false;
+
+        // 마우스 커서가 게임 화면을 벗어나지 못하도록 잠금
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()

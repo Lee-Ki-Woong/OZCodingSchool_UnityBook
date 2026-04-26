@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFire
   BulletPref: {fileID: 8019360787671295097, guid: 901a06d89d5a33c4cb2e34d4a1b133ea, type: 3}
+  firePower: 100
 --- !u!1 &222608685
 GameObject:
   m_ObjectHideFlags: 0
