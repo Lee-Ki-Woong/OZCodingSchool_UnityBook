@@ -213,7 +213,7 @@ MonoBehaviour:
   BulletPref: {fileID: 8019360787671295097, guid: 901a06d89d5a33c4cb2e34d4a1b133ea, type: 3}
   Gun: {fileID: 1790971917}
   firePower: 100
-  ShootEffectPref: {fileID: 0}
+  ShootEffectPref: {fileID: 9142988823275351238, guid: 109744005a7eba040920fc3fbf9d6729, type: 3}
 --- !u!1 &222608685
 GameObject:
   m_ObjectHideFlags: 0
