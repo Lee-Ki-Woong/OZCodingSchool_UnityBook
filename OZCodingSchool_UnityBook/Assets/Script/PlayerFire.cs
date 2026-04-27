@@ -26,7 +26,6 @@ public class PlayerFire : MonoBehaviour
         // 마우스 좌클릭을 누르는 순간
         if (Input.GetMouseButtonDown(0))
         {
-            ShotBullet();
             ShotRay();
         }
     }
@@ -52,20 +51,16 @@ public class PlayerFire : MonoBehaviour
         // Ray를 발사하고, Ray에 맞은 물체는 hit에 저장, 맞은 물체가 있을 때만 확인
         if (Physics.Raycast(ray, out hit))
         {
-            // 맞은 물체의 이름 출력
-            print(hit.transform.name);
-
             // 맞은 위치에, 맞은 표면의 수직이 되는 각도로 총 효과 프리팹의 복사본 생성
             GameObject ShootEffect = Instantiate(ShootEffectPref, hit.point + hit.normal * 0.01f, Quaternion.LookRotation(hit.normal));
 
             // 총알 자국을 맞은 오브젝트의 자식으로 설정
-            ShootEffect.transform.SetParent(hit.transform);
+            Destroy(ShootEffect, 0.5f); // 0.5초 뒤 자동 삭제 추가
 
-            // Ray에 맞은 물체가 적이라면
-            if(hit.transform.tag == "Enemy")
+            if (hit.transform.CompareTag("Enemy"))
             {
-                // 적에게 10만큼 공격 받으라고 전달
-                hit.transform.SendMessage("Damaged", 10);
+                // 맞은 녀석(자식)부터 위로 올라가며 Damaged 함수를 찾아 실행!
+                hit.transform.SendMessageUpwards("Damaged", 10f);
             }
         }
     }

@@ -60,7 +60,16 @@ public class Enemy : MonoBehaviour
                     Attack();
                 }
                 break;
+            case EnemyState.Damaged:
+                // 1초 뒤에 자동으로 Idle 상태로 복귀하는 로직 (간단한 예시)
+                Invoke("BackToIdle", 1.0f);
+                break;
         }
+    }
+
+    void BackToIdle()
+    {
+        if (Hp > 0) EState = EnemyState.Idle;
     }
 
     void Damaged(float damage)
@@ -118,6 +127,7 @@ public class Enemy : MonoBehaviour
             //플레이어의 위치를 목적지로 설정
             agent.SetDestination(Player.position);
         }
+
     }
 
 
