@@ -24,5 +24,10 @@ public class Enemy : MonoBehaviour
 
         // 감소한 체력을 체력바에 표시
         HpBar.value = Hp;
+
+        if(Hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
