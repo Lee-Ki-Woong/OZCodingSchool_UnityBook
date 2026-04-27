@@ -19,17 +19,29 @@ public class Enemy : MonoBehaviour
     public Slider HpBar; // 적의 체력바
     public float Hp = 100.0f; // 적의 체력
 
-
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-
+        // 기본, 이동, 공격 상태일 때 할 일 나누기
+        switch (EState)
+        {
+            case EnemyState.Idle:
+                {
+                    Idle();
+                }
+                break;
+            case EnemyState.Walk:
+                {
+                    Walk();
+                }
+                break;
+            case EnemyState.Attack:
+                {
+                    Attack();
+                }
+                break;
+        }
     }
-    
+
     void Damaged(float damage)
     {
         // 공격 받은 데미지만큼 체력 감소
@@ -42,5 +54,20 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Idle()
+    {
+
+    }
+    
+    void Walk()
+    {
+
+    }
+
+    void Attack()
+    {
+
     }
 }
