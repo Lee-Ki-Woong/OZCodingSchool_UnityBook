@@ -60,7 +60,13 @@ public class PlayerFire : MonoBehaviour
 
             // 총알 자국을 맞은 오브젝트의 자식으로 설정
             ShootEffect.transform.SetParent(hit.transform);
-        
+
+            // Ray에 맞은 물체가 적이라면
+            if(hit.transform.tag == "Enemy")
+            {
+                // 적에게 10만큼 공격 받으라고 전달
+                hit.transform.SendMessage("Damaged", 10);
+            }
         }
     }
 }

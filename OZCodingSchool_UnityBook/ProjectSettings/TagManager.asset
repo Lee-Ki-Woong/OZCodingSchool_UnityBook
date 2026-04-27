@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Monster
+  - Enemy
   layers:
   - Default
   - TransparentFX
