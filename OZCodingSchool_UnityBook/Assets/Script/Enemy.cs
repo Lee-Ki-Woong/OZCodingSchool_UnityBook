@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI; // UI 관련 클래스를 사용하기 위함
+using UnityEngine.AI; // AI 관련 클래스를 사용하기 위함
 
 public class Enemy : MonoBehaviour
 {
@@ -19,13 +20,20 @@ public class Enemy : MonoBehaviour
     public Slider HpBar; // 적의 체력바
     public float Hp = 100.0f; // 적의 체력
 
-    Transform Player; // 플레이어
+    [SerializeField] private Transform Player; // 플레이어 및 플레이어의 컴포넌트 가져오기
+
     float distance; // 플레이어와의 거리
+    NavMeshAgent agent; // NavMeshAgent 컴포넌트
 
     private void Start()
     {
-        // Player 컴포넌트로 찾은 플레이어의 Transform 컴포넌트 가져오기
-        Player = FindObjectOfType<Player>().transform;
+        // 나의 NavMeshAgent 컴포넌트 가져오기
+        agent = GetComponent<NavMeshAgent>();
+
+        // 플레이어를 태그로 찾기
+        var player = GameObject.FindGameObjectWithTag("Player");
+
+        Player = player.transform;
     }
 
     void Update()
@@ -33,9 +41,6 @@ public class Enemy : MonoBehaviour
 
         // 적과 플레이어 사이의 거리 계산
         distance = Vector3.Distance(transform.position, Player.position);
-
-        // 적과 플레이어 사이의 거리 출력
-        print(distance);
 
         // 기본, 이동, 공격 상태일 때 할 일 나누기
         switch (EState)
@@ -66,6 +71,9 @@ public class Enemy : MonoBehaviour
         // 감소한 체력을 체력바에 표시
         HpBar.value = Hp;
 
+        agent.isStopped = true; // 이동 중단
+        agent.ResetPath(); // 경로 초기화
+
         if(Hp >0) // 체력이 남아있다면
         {
             EState = EnemyState.Damaged; // 피격 상태로 전환
@@ -84,6 +92,7 @@ public class Enemy : MonoBehaviour
         if (distance <= 8)
         {
             EState = EnemyState.Walk; // 이동 상태로 전환
+            agent.isStopped = false; // 이동 시작
         }
     }
 
@@ -93,13 +102,24 @@ public class Enemy : MonoBehaviour
         if (distance > 8)
         {
             EState = EnemyState.Idle; // 기본 상태로 전환
+            agent.isStopped = true; // 이동 중단
+            agent.ResetPath(); // 경로 초기화
         }
         //플레이어와의 거리가 2 이하라면
         else if (distance <= 2)
         {
             EState = EnemyState.Attack; // 공격 상태로 전환
+            agent.isStopped = true; // 이동 중단
+            agent.ResetPath(); // 경로 초기화
+        }
+        // 다른 상태로 전환하지 않을 때는
+        else
+        {
+            //플레이어의 위치를 목적지로 설정
+            agent.SetDestination(Player.position);
         }
     }
+
 
     void Attack() // 공격 상태일 때 계속 할 일
     {
@@ -107,6 +127,7 @@ public class Enemy : MonoBehaviour
         if(distance > 2)
         {
             EState = EnemyState.Walk; // 이동 상태로 전환
+            agent.isStopped=false; // 이동 시작
         }
     }
 }
