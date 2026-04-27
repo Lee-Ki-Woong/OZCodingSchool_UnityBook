@@ -9,6 +9,9 @@ public class PlayerFire : MonoBehaviour
     // 총알을 발사하는 힘
     [SerializeField] private float firePower;
 
+    // 총 효과 프리팹을 담아둘 변수
+    [SerializeField] private GameObject ShootEffectPref;
+
     private void Start()
     {
         // 마우스 커서를 안 보이게
@@ -51,6 +54,14 @@ public class PlayerFire : MonoBehaviour
         {
             // 맞은 물체의 이름 출력
             print(hit.transform.name);
+
+            if (hit.transform.tag == "Monster")
+            {
+                Destroy(hit.transform.gameObject);
+            }
+
+            //맞은 위치에, 맞은 표면의 수직이 되는 각도로 총 효과 프리팹의 복사본 생성
+            Instantiate(ShootEffectPref, hit.point, Quaternion.LookRotation(hit.normal));
         }
     }
 }
