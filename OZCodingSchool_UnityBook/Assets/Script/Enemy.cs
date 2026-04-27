@@ -72,18 +72,35 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Idle()
+    void Idle() // 기본 상태일 때 계속 할 일
     {
-
+        // 플레이어와의 거리가 8 이하라면
+        if (distance <= 8)
+        {
+            EState = EnemyState.Walk; // 이동 상태로 전환
+        }
     }
-    
-    void Walk()
-    {
 
+    void Walk() // 이동 상태일 때 계속 할 일
+    {
+        // 플레이어와의 거리가 8보다 크다면
+        if (distance > 8)
+        {
+            EState = EnemyState.Idle; // 기본 상태로 전환
+        }
+        //플레이어와의 거리가 2 이하라면
+        else if (distance <= 2)
+        {
+            EState = EnemyState.Attack; // 공격 상태로 전환
+        }
     }
 
-    void Attack()
+    void Attack() // 공격 상태일 때 계속 할 일
     {
-
+        // 플레이어와의 거리가 2 보다 크다면
+        if(distance > 2)
+        {
+            EState = EnemyState.Walk; // 이동 상태로 전환
+        }
     }
 }
