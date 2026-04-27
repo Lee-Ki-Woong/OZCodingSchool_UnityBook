@@ -19,8 +19,24 @@ public class Enemy : MonoBehaviour
     public Slider HpBar; // 적의 체력바
     public float Hp = 100.0f; // 적의 체력
 
+    Transform Player; // 플레이어
+    float distance; // 플레이어와의 거리
+
+    private void Start()
+    {
+        // Player 컴포넌트로 찾은 플레이어의 Transform 컴포넌트 가져오기
+        Player = FindObjectOfType<Player>().transform;
+    }
+
     void Update()
     {
+
+        // 적과 플레이어 사이의 거리 계산
+        distance = Vector3.Distance(transform.position, Player.position);
+
+        // 적과 플레이어 사이의 거리 출력
+        print(distance);
+
         // 기본, 이동, 공격 상태일 때 할 일 나누기
         switch (EState)
         {
