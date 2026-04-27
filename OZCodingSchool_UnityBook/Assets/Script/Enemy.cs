@@ -66,10 +66,16 @@ public class Enemy : MonoBehaviour
         // 감소한 체력을 체력바에 표시
         HpBar.value = Hp;
 
-        if(Hp <= 0)
+        if(Hp >0) // 체력이 남아있다면
         {
-            Destroy(gameObject);
+            EState = EnemyState.Damaged; // 피격 상태로 전환
         }
+        else // 체력이 남아있지 않다면
+        {
+            EState = EnemyState.Dead; // 죽음 상태로 전환
+        }
+
+        
     }
 
     void Idle() // 기본 상태일 때 계속 할 일
