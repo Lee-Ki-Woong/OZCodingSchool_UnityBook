@@ -55,8 +55,12 @@ public class PlayerFire : MonoBehaviour
             // 맞은 물체의 이름 출력
             print(hit.transform.name);
 
-            //맞은 위치에, 맞은 표면의 수직이 되는 각도로 총 효과 프리팹의 복사본 생성
-            Instantiate(ShootEffectPref, hit.point, Quaternion.LookRotation(hit.normal));
+            // 맞은 위치에, 맞은 표면의 수직이 되는 각도로 총 효과 프리팹의 복사본 생성
+            GameObject ShootEffect = Instantiate(ShootEffectPref, hit.point + hit.normal * 0.01f, Quaternion.LookRotation(hit.normal));
+
+            // 총알 자국을 맞은 오브젝트의 자식으로 설정
+            ShootEffect.transform.SetParent(hit.transform);
+        
         }
     }
 }
